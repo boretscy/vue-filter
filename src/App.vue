@@ -102,6 +102,26 @@ export default {
 
         this.dealershipValue = []
         this.dealershipOptions = this.buildDealershipOptions()
+        
+        let s
+        if ( this.cityOptions.length ) {
+            s = this.cityValue
+            this.cityOptions.forEach( function(item) {
+                if ( item.selected ) s.push(item)
+            })
+        }
+        if ( this.brandOptions.length ) {
+            s = this.brandValue
+            this.brandOptions.forEach( function(item) {
+                if ( item.selected ) s.push(item)
+            })
+        }
+        if ( this.dealershipOptions.length ) {
+            s = this.dealershipValue
+            this.dealershipOptions.forEach( function(item) {
+                if ( item.selected ) s.push(item)
+            })
+        }
     },
     watch: {
         cityValue: function() {
