@@ -78,9 +78,9 @@ export default {
             get: this.$root.get,
             baseurl: this.$root.baseurl,
             values: {
-                brands: [],
-                dealerships: [],
-                cities: []
+                brand: [],
+                dealership: [],
+                citie: []
             },
             result: {}
         }
@@ -92,6 +92,11 @@ export default {
     computed: {
         link: function() {
             return this.buildLink()
+        }
+    },
+    watch: {
+        values: function() {
+
         }
     },
     methods: {
