@@ -179,18 +179,28 @@ export default {
 
             this.link = this.buildLink() 
 
-            this.brandValue = []
-            this.brandOptions = this.buildBrandpOptions()
+            if ( this.view.brand ) {
+                this.brandValue = []
+                this.brandOptions = this.buildBrandpOptions()
+            }
 
-            this.dealershipValue = []
-            this.dealershipOptions = this.buildDealershipOptions()
+            if ( this.view.dealership ) {
+                this.dealershipValue = []
+                this.dealershipOptions = this.buildDealershipOptions()
+            }
 
         },
         brandValue: function() {
+
             this.link = this.buildLink() 
-            this.dealershipOptions = this.buildDealershipOptions()
+
+            if ( this.view.dealership ) {
+                this.dealershipValue = []
+                this.dealershipOptions = this.buildDealershipOptions()
+            }
         },
         dealershipValue: function() {
+
             this.link = this.buildLink() 
         }
     },
@@ -237,12 +247,13 @@ export default {
         },
 
         buildBrandpOptions() {
+            
+            this.brandValue = []
             let res = []
 
             if ( this.cityValue.length ) {
                 let i = this.state.items.brand.items, v = this.cityValue
                 i.forEach( function(iitem) {
-                    console.log(typeof iitem.relation)
                     v.forEach( function(vitem) {
                         for (let k in iitem.relation) {
                             if ( iitem.relation[k] == vitem.code ) res.push(iitem)
@@ -256,6 +267,8 @@ export default {
             return res
         },
         buildDealershipOptions() {
+            
+            this.dealershipValue = []
             let res = []
 
             if ( this.brandValue.length ) {
