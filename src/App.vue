@@ -2,63 +2,102 @@
     <div class="container my-5">
         <div class="row mb-3">
 
-            <div class="col-4 col-md-3">
-                <multiselect 
-                    v-model="brandValue" 
-                    tag-placeholder="Выбрать" 
-                    :placeholder="brandTitle" 
-                    label="name" 
-                    track-by="code" 
-                    :options="brandOptions" 
-                    :searchable="false"
-                    :multiple="true"
-                    selectLabel="Выбрать"
-                    selectedLabel="Выбрано"
-                    deselectLabel="Удалить"
-                    />
-            </div>
+            <div class="col-5">
+                <div class="row">
+                    <div class="col-6" v-if="view.city">
+                        <multiselect 
+                            v-model="cityValue" 
+                            tag-placeholder="Выбрать" 
+                            :placeholder="cityTitle" 
+                            label="name" 
+                            track-by="code" 
+                            :options="cityOptions" 
+                            :searchable="false"
+                            :multiple="true"
+                            selectLabel="Выбрать"
+                            selectedLabel="Выбрано"
+                            deselectLabel="Удалить"
+                            />
+                    </div>
 
-            <div class="col-4 col-md-3">
-                <multiselect 
-                    v-model="dealershipValue" 
-                    tag-placeholder="Выбрать" 
-                    :placeholder="dealershipTitle" 
-                    label="name" 
-                    track-by="code" 
-                    :options="dealershipOptions" 
-                    :searchable="false"
-                    :multiple="true"
-                    selectLabel="Выбрать"
-                    selectedLabel="Выбрано"
-                    deselectLabel="Удалить"
-                    />
-            </div>
+                    <div class="col-6" v-if="view.brand">
+                        <multiselect 
+                            v-model="brandValue" 
+                            tag-placeholder="Выбрать" 
+                            :placeholder="brandTitle" 
+                            label="name" 
+                            track-by="code" 
+                            :options="brandOptions" 
+                            :searchable="false"
+                            :multiple="true"
+                            selectLabel="Выбрать"
+                            selectedLabel="Выбрано"
+                            deselectLabel="Удалить"
+                            />
+                    </div>
 
-            <div class="col-4 col-md-1">
+                    <div class="col-6" v-if="view.dealership">
+                        <multiselect 
+                            v-model="dealershipValue" 
+                            tag-placeholder="Выбрать" 
+                            :placeholder="dealershipTitle" 
+                            label="name" 
+                            track-by="code" 
+                            :options="dealershipOptions" 
+                            :searchable="false"
+                            :multiple="true"
+                            selectLabel="Выбрать"
+                            selectedLabel="Выбрано"
+                            deselectLabel="Удалить"
+                            />
+                    </div>
+                </div>
+            </div>
+            <div class="col-1">
                 <a 
                     :href="link" 
-                    class="d-block w-100 p-2 text-center b-radius-small b-yadarkblue text-decoration-none c-yablack c-h-yablack offers-filter-cancel bg-circle"
+                    class="d-block w-100 p-2 text-center b-radius-small b-yadarkblue text-decoration-none c-yablack c-h-yablack bg-circle"
                     ><span>Показать</span>
                 </a>
             </div>
-            <div class="col-4 col-md-1">
+            <div class="col-1">
                 <a 
                     :href="state.clearlink" 
-                    class="d-block w-100 p-2 text-center b-radius-small b-yayellow text-decoration-none c-yablack c-h-yablack offers-filter-cancel bg-circle"
+                    class="d-block w-100 p-2 text-center b-radius-small b-yayellow text-decoration-none c-yablack c-h-yablack bg-circle"
                     ><span>Все</span>
                 </a>
             </div>
             
-            <div class="col-12 col-md">
-                <ul class="list-inline offers-filter-tags">
+            <div class="col"  v-if="view.tag">
+                <ul class="list-inline">
                     <li class="list-inline-item me-3 pt-2" v-for="(item, indx) in tagOptions" :key="indx">
                         <a 
                             :href="link+'&tag='+item.code" 
-                            class="py-2 text-decoration-none offers-filter-tags-item"
+                            class="py-2 text-decoration-none"
                             :class="{'c-yablue c-h-yadarkblue': item.selected, 'c-yablackgray c-h-yadarkgray': !item.selected}"
                             >{{ item.name }}</a>
                     </li>
                 </ul>
+            </div>
+
+            <div class="col-3 filter-mode"  v-if="view.mode">
+                <div class="row">
+                    <div 
+                        class="col-6"
+                        v-for="(item, indx) in modeOptions"
+                        :key="indx">
+                        <a 
+                            :href="link+'&mode='+item.code"  
+                            class="d-block p-2 text-center b-radius-small text-decoration-none c-yablack c-h-yablack"
+                            :class="{'b-yayellow': item.selected, 'b-yawhite': !item.selected}"
+                            >
+                            <icon-base icon-name="list" v-if="item.code == 'list'"><icon-list /></icon-base>
+                            <icon-base icon-name="map" v-if="item.code == 'map'"><icon-map /></icon-base>
+                            <span>{{ item.name }}</span>
+                        </a>
+                    </div>
+                </div>
+                
             </div>
 
         </div>
@@ -67,6 +106,9 @@
 
 <script>
 import Multiselect from 'vue-multiselect'
+import IconBase from '@/components/IconBase.vue'
+import IconList from '@/components/icons/IconList.vue'
+import IconMap from '@/components/icons/IconMap.vue'
 
 export default {
     name: 'App',
@@ -79,20 +121,29 @@ export default {
 
             brandValue: [],
             brandOptions: this.$root.state.items.brand.items,
-            brandTitle: this.$root.state.items.brand.title,
 
             dealershipValue: [],
             dealershipOptions: this.$root.state.items.dealership.items,
             dealershipTitle: this.$root.state.items.dealership.title,
 
             tagOptions: this.$root.state.items.tag.items,
+
+            modeOptions: this.$root.state.items.mode.items,
+
+            view: this.$root.state.view,
+
             result: {},
             link: null
         }
 
     },
     components: {
-        Multiselect
+        Multiselect,
+        IconBase, IconList, IconMap
+    },
+    computed: {
+        cityTitle: function() { return this.$root.state.items.city.title || this.cityOptions.length+' '+this.getWorld(this.cityOptions.length, 'c') },
+        brandTitle: function() { return this.$root.state.items.brand.title || this.brandOptions.length+' '+this.getWorld(this.brandOptions.length, 'b') }
     },
     mounted: function() {
         this.link = this.buildLink() 
@@ -104,19 +155,19 @@ export default {
         this.dealershipOptions = this.buildDealershipOptions()
         
         let s
-        if ( this.cityOptions.length ) {
+        if ( this.view.city ) {
             s = this.cityValue
             this.cityOptions.forEach( function(item) {
                 if ( item.selected ) s.push(item)
             })
         }
-        if ( this.brandOptions.length ) {
+        if ( this.view.brand ) {
             s = this.brandValue
             this.brandOptions.forEach( function(item) {
                 if ( item.selected ) s.push(item)
             })
         }
-        if ( this.dealershipOptions.length ) {
+        if ( this.view.dealership ) {
             s = this.dealershipValue
             this.dealershipOptions.forEach( function(item) {
                 if ( item.selected ) s.push(item)
@@ -149,7 +200,7 @@ export default {
             this.result = {}
             if ( this.cityValue.length ) {
                 let a = []
-                this.cityValue.forEach( function(item) { a.push(item.code)})
+                this.cityValue.forEach( function(item) { a.push(item.name)})
                 this.result.city = a.join(',`')
             } else {
                 this.result.city = null
@@ -191,9 +242,10 @@ export default {
             if ( this.cityValue.length ) {
                 let i = this.state.items.brand.items, v = this.cityValue
                 i.forEach( function(iitem) {
+                    console.log(typeof iitem.relation)
                     v.forEach( function(vitem) {
-                        if ( iitem.relation == vitem.code ) {
-                            res.push(iitem)
+                        for (let k in iitem.relation) {
+                            if ( iitem.relation[k] == vitem.code ) res.push(iitem)
                         }
                     })
                 })
@@ -220,6 +272,21 @@ export default {
             }
             
             return res
+        },
+        getWorld( q = 1, f = 'b' ) {
+
+            let res = {
+                'c': ['город', 'города', 'городов'],
+                'b': ['бренд', 'бренда', 'брендов']
+            }
+            let t = [
+				[1, 21, 31, 41, 51, 61, 71, 81, 91, 101, 121, 131, 141, 151, 161, 171, 181, 191],
+				[2,3,4,22,23,24,32,33,34,42,43,44,52,53,54,62,63,64,72,73,74,82,83,84,92,93,94,102,103,104,122,123,124,132,133,134,142,143,144,152,153,154,162,163,164,172,173,174,182,183,184,192,193,194]
+			]
+
+            if ( t[0].indexOf(q) >= 0 ) return res[f][0]
+            if ( t[1].indexOf(q) >= 0 ) return res[f][1]
+            return res[f][2]
         }
         
     }
@@ -227,6 +294,11 @@ export default {
 </script>
 
 <style>
+.filter-mode svg {
+	width: 18px;
+	height: 18px;
+	margin-right: 10px;
+}
 fieldset[disabled] .multiselect {
   pointer-events: none;
 }
