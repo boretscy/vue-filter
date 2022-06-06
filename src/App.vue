@@ -4,12 +4,12 @@
 
             <div class="col-4 col-md-3">
                 <multiselect 
-                    v-model="values[sort.one]" 
+                    v-model="brandValue" 
                     tag-placeholder="Выбрать" 
-                    :placeholder="items[sort.one].title" 
+                    :placeholder="brandTitle" 
                     label="name" 
                     track-by="code" 
-                    :options="items[sort.one].items" 
+                    :options="brandOptions" 
                     :searchable="false"
                     :multiple="true"
                     selectLabel="Выбрать"
@@ -20,12 +20,12 @@
 
             <div class="col-4 col-md-3">
                 <multiselect 
-                    v-model="values[sort.two]" 
+                    v-model="dealershipValue" 
                     tag-placeholder="Выбрать" 
-                    :placeholder="items[sort.two].title" 
+                    :placeholder="dealershipTitle" 
                     label="name" 
                     track-by="code" 
-                    :options="items[sort.two].items" 
+                    :options="dealershipOptions" 
                     :searchable="false"
                     :multiple="true"
                     selectLabel="Выбрать"
@@ -43,17 +43,17 @@
             </div>
             <div class="col-4 col-md-1">
                 <a 
-                    :href="clearlink" 
+                    :href="state.clearlink" 
                     class="d-block w-100 p-2 text-center b-radius-small b-yayellow text-decoration-none c-yablack c-h-yablack offers-filter-cancel bg-circle"
                     ><span>Все</span>
                 </a>
             </div>
             
-            <div class="col-12 col-md" v-if="sort.three">
+            <div class="col-12 col-md">
                 <ul class="list-inline offers-filter-tags">
-                    <li class="list-inline-item me-3 pt-2" v-for="(item, indx) in items[sort.three].items" :key="indx">
+                    <li class="list-inline-item me-3 pt-2" v-for="(item, indx) in tagOptions" :key="indx">
                         <a 
-                            :href="item.link" 
+                            :href="link+'&tag='+item.code" 
                             class="py-2 text-decoration-none offers-filter-tags-item"
                             :class="{'c-yablue c-h-yadarkblue': item.selected, 'c-yablackgray c-h-yadarkgray': !item.selected}"
                             >{{ item.name }}</a>
@@ -72,50 +72,87 @@ export default {
     name: 'App',
     data() {
         return {
-            items: this.$root.items,
-            sort: this.$root.sort,
-            clearlink: this.$root.clearlink,
-            get: this.$root.get,
-            baseurl: this.$root.baseurl,
-            values: {
-                brand: [],
-                dealership: [],
-                citie: []
-            },
-            result: {}
+            state: this.$root.state,
+
+            cityValue: [],
+            cityOptions: this.$root.state.items.city.items,
+
+            brandValue: [],
+            brandOptions: this.$root.state.items.brand.items,
+            brandTitle: this.$root.state.items.brand.title,
+
+            dealershipValue: [],
+            dealershipOptions: this.$root.state.items.dealership.items,
+            dealershipTitle: this.$root.state.items.dealership.title,
+
+            tagOptions: this.$root.state.items.tag.items,
+            result: {},
+            link: null
         }
 
     },
     components: {
         Multiselect
     },
-    computed: {
-        link: function() {
-            return this.buildLink()
-        }
+    mounted: function() {
+        this.link = this.buildLink() 
+
+        this.brandValue = []
+        this.brandOptions = this.buildBrandpOptions()
+
+        this.dealershipValue = []
+        this.dealershipOptions = this.buildDealershipOptions()
     },
     watch: {
-        values: function() {
+        cityValue: function() {
 
+            this.link = this.buildLink() 
+
+            this.brandValue = []
+            this.brandOptions = this.buildBrandpOptions()
+
+            this.dealershipValue = []
+            this.dealershipOptions = this.buildDealershipOptions()
+
+        },
+        brandValue: function() {
+            this.link = this.buildLink() 
+            this.dealershipOptions = this.buildDealershipOptions()
+        },
+        dealershipValue: function() {
+            this.link = this.buildLink() 
         }
     },
     methods: {
         buildLink() {
 
-            console.log(this.values)
-
             this.result = {}
-            for ( let i in this.values ) {
-                if ( this.values[i].length ) {
-                    let a = []
-                    this.values[i].forEach( function(item) { a.push(item.code)})
-                    this.result[i] = a.join(',`')
-                } else {
-                    this.result[i] = null
-                }
+            if ( this.cityValue.length ) {
+                let a = []
+                this.cityValue.forEach( function(item) { a.push(item.code)})
+                this.result.city = a.join(',`')
+            } else {
+                this.result.city = null
             }
-            for ( let i in this.get ) {
-                this.result[i] = this.get[i]
+
+            if ( this.brandValue.length ) {
+                let a = []
+                this.brandValue.forEach( function(item) { a.push(item.code)})
+                this.result.brand = a.join(',`')
+            } else {
+                this.result.brand = null
+            }
+
+            if ( this.dealershipValue.length ) {
+                let a = []
+                this.dealershipValue.forEach( function(item) { a.push(item.code)})
+                this.result.dealership = a.join(',`')
+            } else {
+                this.result.dealership = null
+            }
+            
+            for ( let i in this.state.get ) {
+                this.result[i] = this.state.get[i]
             }
 
             let s = new URLSearchParams();
@@ -125,8 +162,46 @@ export default {
                 }
             }
 
-            return this.baseurl+'?'+s.toString()
+            return this.state.baseurl+'?'+s.toString()
+        },
+
+        buildBrandpOptions() {
+            let res = []
+
+            if ( this.cityValue.length ) {
+                let i = this.state.items.brand.items, v = this.cityValue
+                i.forEach( function(iitem) {
+                    v.forEach( function(vitem) {
+                        if ( iitem.relation == vitem.code ) {
+                            res.push(iitem)
+                        }
+                    })
+                })
+            } else {
+                res = this.state.items.brand.items
+            }
+            
+            return res
+        },
+        buildDealershipOptions() {
+            let res = []
+
+            if ( this.brandValue.length ) {
+                let i = this.state.items.dealership.items, v = this.brandValue
+                i.forEach( function(iitem) {
+                    v.forEach( function(vitem) {
+                        if ( iitem.relation == vitem.code ) {
+                            res.push(iitem)
+                        }
+                    })
+                })
+            } else {
+                res = this.state.items.dealership.items
+            }
+            
+            return res
         }
+        
     }
 }
 </script>

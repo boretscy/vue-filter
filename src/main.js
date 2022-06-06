@@ -3,10 +3,12 @@ import App from './App.vue'
 
 new Vue({
   data() {
-    return window.filter
+    return {
+      state: window.filter
+    }
   },
   mounted: function() {
-    console.log( this.items )
+    console.log(this.state)
   },
   render: h => h(App),
 }).$mount('#VueFilter')
