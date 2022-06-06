@@ -104,7 +104,7 @@ export default {
                 if ( this.values[i].length ) {
                     let a = []
                     this.values[i].forEach( function(item) { a.push(item.code)})
-                    this.result[i] = a.join(',')
+                    this.result[i] = a.join(',`')
                 } else {
                     this.result[i] = null
                 }
@@ -113,14 +113,14 @@ export default {
                 this.result[i] = this.get[i]
             }
 
-            let l = this.baseurl+'?'
+            let s = new URLSearchParams();
             for ( let i in this.result ) {
                 if ( this.result[i] ) {
-                    l += '&'+i+'='+this.result[i]
+                    s.append(i, this.result[i]);
                 }
             }
 
-            return l
+            return this.baseurl+'?'+s.toString()
         }
     }
 }
