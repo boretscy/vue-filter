@@ -103,8 +103,8 @@ export default {
             for ( let i in this.values ) {
                 if ( this.values[i].length ) {
                     let a = []
-                    this.values[i].forEach( function(item) { a.push(item.name)})
-                    this.result[i] = a.join('--')
+                    this.values[i].forEach( function(item) { a.push(item.code)})
+                    this.result[i] = a.join(',')
                 } else {
                     this.result[i] = null
                 }
