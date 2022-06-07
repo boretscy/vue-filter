@@ -17,7 +17,9 @@
                             selectLabel="Выбрать"
                             selectedLabel="Выбрано"
                             deselectLabel="Удалить"
-                            />
+                            >
+                            <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} выбрано</span></template>
+                            </multiselect>
                     </div>
 
                     <div class="col-6" v-if="view.brand">
@@ -33,7 +35,9 @@
                             selectLabel="Выбрать"
                             selectedLabel="Выбрано"
                             deselectLabel="Удалить"
-                            />
+                            >
+                            <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} выбрано</span></template>
+                            </multiselect>
                     </div>
 
                     <div class="col-6" v-if="view.dealership">
@@ -49,7 +53,9 @@
                             selectLabel="Выбрать"
                             selectedLabel="Выбрано"
                             deselectLabel="Удалить"
-                            />
+                            >
+                            <template slot="selection" slot-scope="{ values, search, isOpen }"><span class="multiselect__single" v-if="values.length &amp;&amp; !isOpen">{{ values.length }} выбрано</span></template>
+                            </multiselect>
                     </div>
                 </div>
             </div>
@@ -368,7 +374,7 @@ fieldset[disabled] .multiselect {
   display: block;
   position: relative;
   width: 100%;
-  min-height: 40px;
+  height: 40px;
   text-align: left;
   color: var(--yablack);
 }
