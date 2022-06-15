@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 col-md-1">
+            <div class="col-3 col-md-1 mb-4 mb-md-0">
                 <a 
                     :href="link" 
                     class="d-block w-100 p-2 text-center b-radius-small b-yadarkblue text-decoration-none c-yablack c-h-yablack bg-circle"
