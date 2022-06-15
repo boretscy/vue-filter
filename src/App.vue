@@ -2,9 +2,9 @@
     <div class="container my-5">
         <div class="row mb-3">
 
-            <div class="col-md-5">
-                <div class="row mb-4 mb-md-0">
-                    <div class="col-6" v-if="view.city">
+            <div class="col-xl-5">
+                <div class="row">
+                    <div class="col-md-6 mb-3" v-if="view.city">
                         <multiselect 
                             v-model="cityValue" 
                             tag-placeholder="Выбрать" 
@@ -24,7 +24,7 @@
                             </multiselect>
                     </div>
 
-                    <div class="col-6" v-if="view.brand">
+                    <div class="col-md-6 mb-3" v-if="view.brand">
                         <multiselect 
                             v-model="brandValue" 
                             tag-placeholder="Выбрать" 
@@ -44,7 +44,7 @@
                             </multiselect>
                     </div>
 
-                    <div class="col-6" v-if="view.dealership">
+                    <div class="col-md-6 mb-3" v-if="view.dealership">
                         <multiselect 
                             v-model="dealershipValue" 
                             tag-placeholder="Выбрать" 
@@ -65,14 +65,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-3 col-md-1 mb-4 mb-md-0">
+            <div class="col-md-12 col-xl-1 mb-3">
                 <a 
                     :href="link" 
                     class="d-block w-100 p-2 text-center b-radius-small b-yadarkblue text-decoration-none c-yablack c-h-yablack bg-circle"
                     ><span>Показать</span>
                 </a>
             </div>
-            <div class="col-3 col-md-1">
+            <div class="col-3 col-md-2 col-xl-1">
                 <a 
                     :href="state.clearlink" 
                     class="d-block w-100 p-2 text-center b-radius-small b-yayellow text-decoration-none c-yablack c-h-yablack bg-circle"
@@ -80,7 +80,7 @@
                 </a>
             </div>
             
-            <div class="col"  v-if="view.tag">
+            <div class="col text-end text-sm-start"  v-if="view.tag">
                 <ul class="list-inline">
                     <li class="list-inline-item me-3 pt-2" v-for="(item, indx) in tagOptions" :key="indx">
                         <a 
@@ -92,7 +92,7 @@
                 </ul>
             </div>
 
-            <div class="col-md-3 filter-mode"  v-if="view.mode">
+            <div class="col-md-6 col-xl-3 filter-mode"  v-if="view.mode">
                 <div class="row">
                     <div 
                         class="col-6"
