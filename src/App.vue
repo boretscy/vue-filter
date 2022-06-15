@@ -2,8 +2,8 @@
     <div class="container my-5">
         <div class="row mb-3">
 
-            <div class="col-5">
-                <div class="row">
+            <div class="col-md-5">
+                <div class="row mb-4 mb-md-0">
                     <div class="col-6" v-if="view.city">
                         <multiselect 
                             v-model="cityValue" 
@@ -65,14 +65,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-1">
+            <div class="col-3 col-md-1">
                 <a 
                     :href="link" 
                     class="d-block w-100 p-2 text-center b-radius-small b-yadarkblue text-decoration-none c-yablack c-h-yablack bg-circle"
                     ><span>Показать</span>
                 </a>
             </div>
-            <div class="col-1">
+            <div class="col-3 col-md-1">
                 <a 
                     :href="state.clearlink" 
                     class="d-block w-100 p-2 text-center b-radius-small b-yayellow text-decoration-none c-yablack c-h-yablack bg-circle"
@@ -92,7 +92,7 @@
                 </ul>
             </div>
 
-            <div class="col-3 filter-mode"  v-if="view.mode">
+            <div class="col-md-3 filter-mode"  v-if="view.mode">
                 <div class="row">
                     <div 
                         class="col-6"
