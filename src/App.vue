@@ -319,6 +319,9 @@ export default {
 </script>
 
 <style>
+.container {
+    font-size: 14px;
+}
 .filter-mode svg {
 	width: 18px;
 	height: 18px;
