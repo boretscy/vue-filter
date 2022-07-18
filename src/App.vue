@@ -407,8 +407,8 @@ fieldset[disabled] .multiselect {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-.multiselect--active .multiselect__select {
-    transform: rotateZ(180deg);
+.multiselect.multiselect--active .multiselect__select {
+    transform: none !important;
   }
 .multiselect--above.multiselect--active .multiselect__current,
 .multiselect--above.multiselect--active .multiselect__input,
