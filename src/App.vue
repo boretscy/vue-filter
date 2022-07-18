@@ -410,6 +410,9 @@ fieldset[disabled] .multiselect {
 .multiselect.multiselect--active .multiselect__select {
     transform: none !important;
   }
+.multiselect--active {
+    transform: none !important;
+  }
 .multiselect--above.multiselect--active .multiselect__current,
 .multiselect--above.multiselect--active .multiselect__input,
 .multiselect--above.multiselect--active .multiselect__tags {
