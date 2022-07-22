@@ -80,7 +80,7 @@
                 </a>
             </div>
             
-            <div class="col text-end text-sm-start"  v-if="view.tag">
+            <div class="col text-end"  v-if="view.tag">
                 <ul class="list-inline">
                     <li class="list-inline-item me-3 pt-2" v-for="(item, indx) in tagOptions" :key="indx">
                         <a 
