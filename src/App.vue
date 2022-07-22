@@ -86,7 +86,7 @@
                         <a 
                             :href="link+'&tag='+item.code" 
                             class="py-2 text-decoration-none"
-                            :class="{'c-yablue c-h-yadarkblue': item.selected, 'c-yablackgray c-h-yadarkgray': !item.selected}"
+                            :class="{'c-yablue c-h-yadarkblue b-radius-small b-yayellow': item.selected, 'c-yablackgray c-h-yadarkgray': !item.selected}"
                             >{{ item.name }}</a>
                     </li>
                 </ul>
