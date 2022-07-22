@@ -85,7 +85,7 @@
                     <li class="list-inline-item me-3 pt-2" v-for="(item, indx) in tagOptions" :key="indx">
                         <a 
                             :href="link+'&tag='+item.code" 
-                            class="py-2 px-3 text-decoration-none"
+                            class="p-2 text-decoration-none"
                             :class="{'c-yablue c-h-yadarkblue b-radius-small b-yayellow': item.selected, 'c-yablackgray c-h-yadarkgray': !item.selected}"
                             >{{ item.name }}</a>
                     </li>
