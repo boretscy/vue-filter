@@ -75,7 +75,7 @@
             <div class="col-3 col-md-2 col-xl-1">
                 <a 
                     :href="state.clearlink" 
-                    class="d-block w-100 p-2 text-center b-radius-small b-yayellow text-decoration-none c-yablack c-h-yablack bg-circle"
+                    class="d-block w-100 p-2 text-center text-decoration-none c-yablack c-h-yablack"
                     ><span>Все</span>
                 </a>
             </div>
