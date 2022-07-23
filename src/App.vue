@@ -1,5 +1,5 @@
 <template>
-    <div class="container my-5">
+    <div class="container my-5 vue-filter">
         <div class="row mb-3">
 
             <div class="col-xl-5">
@@ -319,6 +319,9 @@ export default {
 </script>
 
 <style>
+.vue-filter {
+    font-size: 14px;
+}
 .filter-mode svg {
 	width: 18px;
 	height: 18px;
