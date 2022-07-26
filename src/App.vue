@@ -77,6 +77,7 @@
                 <a 
                     :href="state.clearlink" 
                     class="d-block w-100 p-2 text-center text-decoration-none c-yablack c-h-yablack "
+                    :class="{'c-yablue c-h-yadarkblue b-radius-small b-yayellow': allselected, 'c-yablackgray c-h-yadarkgray': !allselected}"
                     style="padding: 0.7rem 0.5rem !important;"
                     ><span>Все</span>
                 </a>
@@ -105,6 +106,7 @@
                             :href="link+'&mode='+item.code"  
                             class="d-block p-2 text-center b-radius-small text-decoration-none c-yablack c-h-yablack"
                             :class="{'b-yayellow': item.selected, 'b-yawhite': !item.selected}"
+                            style="padding: 0.7rem 0.5rem !important;"
                             >
                             <icon-base icon-name="list" v-if="item.code == 'list'"><icon-list /></icon-base>
                             <icon-base icon-name="map" v-if="item.code == 'map'"><icon-map /></icon-base>
@@ -161,9 +163,9 @@ export default {
         brandTitle: function() { return this.$root.state.items.brand.title || this.brandOptions.length+' '+this.getWorld(this.brandOptions.length, 'b') },
         allselected: function() {
             let res = true
-            this.view.forEach((i) => {
-                if ( i.selected ) res = false
-            })
+            for (let i in this.view) {
+                 if ( this.view[i].selected ) res = false
+            }
             return res
         }
     },
