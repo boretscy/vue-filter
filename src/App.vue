@@ -85,12 +85,12 @@
             
             <div class="col text-end"  v-if="view.tag">
                 <ul class="list-inline">
-                    <li class="list-inline-item me-3 pt-2" v-for="(item, indx) in tagOptions" :key="indx" style="padding-top: 0.9rem !important;">
+                    <li class="list-inline-item me-3 pt-2" v-for="(item, indx) in tagOptions" :key="indx" style="padding-top: 0.7rem !important;">
                         <a 
                             :href="link+'&tag='+item.code" 
                             class="p-2 text-decoration-none"
                             :class="{'c-yablue c-h-yadarkblue b-radius-small b-yayellow': item.selected, 'c-yablackgray c-h-yadarkgray': !item.selected}"
-                            style="padding: 0.6rem 0.5rem !important;"
+                            style="padding: 0.8rem 0.5rem !important;"
                             >{{ item.name }}</a>
                     </li>
                 </ul>
