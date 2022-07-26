@@ -69,13 +69,15 @@
                 <a 
                     :href="link" 
                     class="d-block w-100 p-2 text-center b-radius-small b-yadarkblue text-decoration-none c-yablack c-h-yablack bg-circle"
+                    style="padding: 0.7rem 0.5rem !important;"
                     ><span>Показать</span>
                 </a>
             </div>
             <div class="col-3 col-md-2 col-xl-1">
                 <a 
                     :href="state.clearlink" 
-                    class="d-block w-100 p-2 text-center text-decoration-none c-yablack c-h-yablack"
+                    class="d-block w-100 p-2 text-center text-decoration-none c-yablack c-h-yablack "
+                    style="padding: 0.7rem 0.5rem !important;"
                     ><span>Все</span>
                 </a>
             </div>
@@ -87,6 +89,7 @@
                             :href="link+'&tag='+item.code" 
                             class="p-2 text-decoration-none"
                             :class="{'c-yablue c-h-yadarkblue b-radius-small b-yayellow': item.selected, 'c-yablackgray c-h-yadarkgray': !item.selected}"
+                            style="padding: 0.7rem 0.5rem !important;"
                             >{{ item.name }}</a>
                     </li>
                 </ul>
@@ -155,7 +158,14 @@ export default {
     },
     computed: {
         cityTitle: function() { return this.$root.state.items.city.title || this.cityOptions.length+' '+this.getWorld(this.cityOptions.length, 'c') },
-        brandTitle: function() { return this.$root.state.items.brand.title || this.brandOptions.length+' '+this.getWorld(this.brandOptions.length, 'b') }
+        brandTitle: function() { return this.$root.state.items.brand.title || this.brandOptions.length+' '+this.getWorld(this.brandOptions.length, 'b') },
+        allselected: function() {
+            let res = true
+            this.view.forEach((i) => {
+                if ( i.selected ) res = false
+            })
+            return res
+        }
     },
     mounted: function() {
         this.link = this.buildLink() 
@@ -555,7 +565,7 @@ fieldset[disabled] .multiselect {
   content: "";
 }
 .multiselect__placeholder {
-  color: var(--yablack);
+  color: var(--yamiddlegray);
   display: inline-block;
   margin-bottom: 10px;
   padding-top: 2px;
