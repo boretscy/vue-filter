@@ -90,7 +90,7 @@
                             :href="link+'&tag='+item.code" 
                             class="p-2 text-decoration-none"
                             :class="{'c-yablue c-h-yadarkblue b-radius-small b-yayellow': item.selected, 'c-yablackgray c-h-yadarkgray': !item.selected}"
-                            style="padding: 0.8rem 0.5rem !important;"
+                            style="padding: 0.6rem 0.5rem !important;"
                             >{{ item.name }}</a>
                     </li>
                 </ul>
