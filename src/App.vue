@@ -163,9 +163,9 @@ export default {
         brandTitle: function() { return this.$root.state.items.brand.title || this.brandOptions.length+' '+this.getWorld(this.brandOptions.length, 'b') },
         allselected: function() {
             let res = true
-            for (let i in this.view) {
-                 if ( this.view[i].selected ) res = false
-            }
+            this.tagOptions.forEach((i) => {
+                 if ( i.selected ) res = false
+            })
             return res
         }
     },
