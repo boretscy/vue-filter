@@ -4,7 +4,7 @@
 
             <div class="col-xl-5">
                 <div class="row">
-                    <div class="col-md-6 mb-3" v-if="view.city">
+                    <div class="col-md-6 mb-3" v-if="view.city" :class="selClass">
                         <multiselect 
                             v-model="cityValue" 
                             tag-placeholder="Выбрать" 
@@ -24,7 +24,7 @@
                             </multiselect>
                     </div>
 
-                    <div class="col-md-6 mb-3" v-if="view.brand">
+                    <div class="col-md-6 mb-3" v-if="view.brand" :class="selClass">
                         <multiselect 
                             v-model="brandValue" 
                             tag-placeholder="Выбрать" 
@@ -44,7 +44,7 @@
                             </multiselect>
                     </div>
 
-                    <div class="col-md-6 mb-3" v-if="view.dealership">
+                    <div class="col-md-6 mb-3" v-if="view.dealership" :class="selClass">
                         <multiselect 
                             v-model="dealershipValue" 
                             tag-placeholder="Выбрать" 
@@ -167,6 +167,15 @@ export default {
                  if ( i.selected ) res = false
             })
             return res
+        },
+        selClass: function() {
+            let res = 'col-md-', c = 0
+            if (this.view.city) c++
+            if (this.view.brand) c++
+            if (this.view.dealership) c++
+            if (c==0) c++
+            console.log(res+12/c)
+            return res+12/c
         }
     },
     mounted: function() {
