@@ -96,22 +96,23 @@
                 </ul>
             </div>
 
-            <div class="col-md-6 col-xl-3 filter-mode"  v-if="view.mode">
+            <div class="col-md-6 col-xl-1 filter-mode"  v-if="view.mode">
                 <div class="row">
                     <div 
-                        class="col-6"
+                        class="col-6 d-flex align-items-center"
                         v-for="(item, indx) in modeOptions"
                         :key="indx">
+                        <VueCustomTooltip :label="item.name">
                         <a 
                             :href="link+'&mode='+item.code"  
-                            class="d-block p-2 text-center b-radius-small text-decoration-none c-yablack c-h-yablack"
+                            class=" d-flex align-items-center text-center b-radius-small text-decoration-none c-yablack c-h-yablack"
                             :class="{'b-yayellow': item.selected, 'b-yawhite': !item.selected}"
                             style="padding: 0.7rem 0.5rem !important;"
                             >
                             <icon-base icon-name="list" v-if="item.code == 'list'"><icon-list /></icon-base>
                             <icon-base icon-name="map" v-if="item.code == 'map'"><icon-map /></icon-base>
-                            <span>{{ item.name }}</span>
                         </a>
+                        </VueCustomTooltip>
                     </div>
                 </div>
                 
@@ -346,7 +347,6 @@ export default {
 .filter-mode svg {
 	width: 18px;
 	height: 18px;
-	margin-right: 10px;
 }
 fieldset[disabled] .multiselect {
   pointer-events: none;
