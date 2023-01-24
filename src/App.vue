@@ -220,7 +220,7 @@ export default {
 
             if ( this.view.dealership ) {
                 this.dealershipValue = []
-                this.dealershipOptions = this.buildDealershipOptions()
+                this.dealershipOptions = this.buildDealershipOptions('cityValue')
             }
 
         },
@@ -230,7 +230,7 @@ export default {
 
             if ( this.view.dealership ) {
                 this.dealershipValue = []
-                this.dealershipOptions = this.buildDealershipOptions()
+                this.dealershipOptions = this.buildDealershipOptions('brandValue')
             }
         },
         dealershipValue: function() {
@@ -300,13 +300,13 @@ export default {
             
             return res
         },
-        buildDealershipOptions() {
+        buildDealershipOptions( parent = 'brandValue' ) {
             
             this.dealershipValue = []
             let res = []
 
-            if ( this.brandValue.length ) {
-                let i = this.state.items.dealership.items, v = this.brandValue
+            if ( this[parent].length ) {
+                let i = this.state.items.dealership.items, v = this[parent]
                 i.forEach( function(iitem) {
                     v.forEach( function(vitem) {
                         if ( iitem.relation == vitem.code ) {
